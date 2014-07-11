@@ -32,7 +32,7 @@ class EntriesController < UITableViewController
   end
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
-    engry = @entries[indexPath.row]
+    entry = @entries[indexPath.row]
 
     # UIWebViewを貼付けたビューコントローラを作成
     controller = UIViewController.new

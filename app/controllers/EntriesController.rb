@@ -31,4 +31,20 @@ class EntriesController < UITableViewController
     cell
   end
 
+  def tableView(tableView, didSelectRowAtIndexPath:indexPath)
+    engry = @entries[indexPath.row]
+
+    # UIWebViewを貼付けたビューコントローラを作成
+    controller = UIViewController.new
+    webview = UIWebView.new
+    webview.frame = controller.view.frame # webviewの表示サイズを調整
+    controller.view.addSubview(webview)
+
+    # 画面遷移
+    navigationController.pushViewController(controller, animated:true)
+
+    # HTML を読み込む
+    webview.loadHTMLString(entry.body, baseURL:nil)
+  end
+
 end

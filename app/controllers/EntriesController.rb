@@ -24,6 +24,7 @@ class EntriesController < UITableViewController
     @entries.count
   end
 
+  ENTRY_CELL_ID = 'Entry'
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
     cell = tableView.dequeueReusableCellWithIdentifier(ENTRY_CELL_ID, forIndexPath:indexPath)
 

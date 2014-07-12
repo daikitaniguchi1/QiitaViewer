@@ -45,9 +45,6 @@ class EntriesController < UITableViewController
 
     # 画面遷移
     navigationController.pushViewController(controller, animated:true)
-
-    # # HTML を読み込む
-    # webview.loadHTMLString(entry.body, baseURL:nil)
   end
 
 end

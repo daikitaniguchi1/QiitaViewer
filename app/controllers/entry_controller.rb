@@ -5,7 +5,7 @@ class EntryController < UIViewController
     super
     
     webview = UIWebView.new
-    webview.frame = view.frame
+    webview.frame = view.frame # webviewの表示サイズを調整
     view.addSubview(webview)
     webview.loadHTMLString(@entry.body, baseURL: nil)
   end

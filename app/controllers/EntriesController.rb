@@ -7,6 +7,7 @@ class EntriesController < UITableViewController
     @tag = 'RubyMotion'
     self.title = @tag
     @entries = []
+    self.tableView.registerClass(EntryCell, forCellReuseIdentifier:'Entry')
 
     Qiita::Client.fetch_tagged_items(@tag) do |items, error_message|
       if error_message.nil?
@@ -19,15 +20,17 @@ class EntriesController < UITableViewController
   end
 
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
-    cell = tableView.dequeueReusableCellWithIdentifier(ENTRY_CELL_ID)
+    cell = tableView.dequeueReusableCellWithIdentifier(ENTRY_CELL_ID, forIndexPath:indexPath)
 
-    if cell.nil?
-      cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier: ENTRY_CELL_ID)
-    end
+    # if cell.nil?
+    #   cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier: ENTRY_CELL_ID)
+    # end
 
     entry = @entries[indexPath.row]
-    cell.textLabel.text = entry.title
-    cell.detailTextLabel.text = "#{entry.updated_at} by #{entry.username}"
+    # cell.textLabel.text = entry.title
+    # cell.detailTextLabel.text = "#{entry.updated_at} by #{entry.username}"
+    cell.entry = entry
+    cell.setNeedsDisplay # 再描画させる
     cell
   end
 

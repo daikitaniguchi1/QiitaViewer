@@ -7,6 +7,8 @@ class EntriesController < UITableViewController
     @tag = 'RubyMotion'
     self.title = @tag  # ナビゲーションバーのタイトルを変更
     @entries = []  # 取得したエントリを格納
+
+    #  EnryというreuseIdentifierに相当するクラスはEntryCellであることを宣言
     self.tableView.registerClass(EntryCell, forCellReuseIdentifier:'Entry')
 
     Qiita::Client.fetch_tagged_items(@tag) do |items, error_message|
@@ -28,26 +30,15 @@ class EntriesController < UITableViewController
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
     cell = tableView.dequeueReusableCellWithIdentifier(ENTRY_CELL_ID, forIndexPath:indexPath)
 
-    # if cell.nil?
-    #   cell = UITableViewCell.alloc.initWithStyle(UITableViewCellStyleSubtitle, reuseIdentifier: ENTRY_CELL_ID)
-    # end
-
     entry = @entries[indexPath.row]
-    # cell.textLabel.text = entry.title
-    # cell.detailTextLabel.text = "#{entry.updated_at} by #{entry.username}"
     cell.entry = entry
     cell.setNeedsDisplay # 再描画させる
+
     cell
   end
 
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
     entry = @entries[indexPath.row]
-
-    # # UIWebViewを貼付けたビューコントローラを作成
-    # controller = UIViewController.new
-    # webview = UIWebView.new
-    # webview.frame = controller.view.frame # webviewの表示サイズを調整
-    # controller.view.addSubview(webview)
 
     controller = EntryController.new
     controller.entry = entry

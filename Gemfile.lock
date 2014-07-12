@@ -10,6 +10,7 @@ GEM
       rb-fsevent (~> 0.9.1)
     rake (10.3.2)
     rb-fsevent (0.9.4)
+    webstub (1.0.1)
 
 PLATFORMS
   ruby
@@ -18,3 +19,4 @@ DEPENDENCIES
   bubble-wrap
   motion-live
   rake
+  webstub

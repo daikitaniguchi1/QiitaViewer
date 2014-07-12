@@ -6,3 +6,5 @@ gem 'rake'
 gem 'bubble-wrap'
 
 gem 'motion-live'
+
+gem 'webstub'

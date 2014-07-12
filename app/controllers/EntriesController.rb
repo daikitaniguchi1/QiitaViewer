@@ -5,8 +5,8 @@ class EntriesController < UITableViewController
     super
 
     @tag = 'RubyMotion'
-    self.title = @tag
-    @entries = []
+    self.title = @tag  # ナビゲーションバーのタイトルを変更
+    @entries = []  # 取得したエントリを格納
     self.tableView.registerClass(EntryCell, forCellReuseIdentifier:'Entry')
 
     Qiita::Client.fetch_tagged_items(@tag) do |items, error_message|
@@ -17,6 +17,11 @@ class EntriesController < UITableViewController
         p error_message
       end
     end
+  end
+
+  # テーブルの行数を返却
+  def tableView(tableView, numberOfRowsInSection:section)
+    @entries.count
   end
 
   def tableView(tableView, cellForRowAtIndexPath:indexPath)

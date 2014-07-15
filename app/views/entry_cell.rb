@@ -9,6 +9,6 @@ class EntryCell < UITableViewCell
   def drawRect(rect)
     super
     self.textLabel.text = @entry.title
-    self.detailTextLabel.text = "#{@entry.updated_at} by #{@entry.username}"
+    self.detailTextLabel.text = "#{@entry.stocks} stocks! by #{@entry.username}"
   end
 end

@@ -13,7 +13,7 @@ module Qiita
     PER_PAGE = 100
     THRESHOLD = 10
 
-    def self.fetch_tagged_items(tag_name, &block)
+    def self.fetch_tagged_items(&block)
       url = BASE_URL + "/items.json?per_page=#{PER_PAGE}"
       # url = BASE_URL + "/tags/#{tag_name}/items"
       BW::HTTP.get(url) do |response|

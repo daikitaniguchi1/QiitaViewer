@@ -4,14 +4,13 @@ class EntriesController < UITableViewController
   def viewDidLoad
     super
 
-    @tag = 'RubyMotion'
-    self.title = @tag  # ナビゲーションバーのタイトルを変更
+    self.title = 'Hot Entries'  # ナビゲーションバーのタイトルを変更
     @entries = []  # 取得したエントリを格納
 
     #  EnryというreuseIdentifierに相当するクラスはEntryCellであることを宣言
     self.tableView.registerClass(EntryCell, forCellReuseIdentifier:'Entry')
 
-    Qiita::Client.fetch_tagged_items(@tag) do |items, error_message|
+    Qiita::Client.fetch_tagged_items do |items, error_message|
       if error_message.nil?
         @entries = items
         self.tableView.reloadData

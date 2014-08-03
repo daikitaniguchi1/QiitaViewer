@@ -2,7 +2,7 @@ module Qiita
 
   # Qiita API から取得したデータを保持
   class Item
-    attr_accessor :title, :username, :updated_at, :body, :stocks, :image, :url
+    attr_accessor :title, :username, :updated_at, :body, :stocks, :profile_image, :profile_image_url, :url
 
     def initialize(data)
       @title = data['title']
@@ -11,7 +11,8 @@ module Qiita
       @body = data['body']
       @stocks = data['stock_count']
       @url = data['url']
-      @image = data['user']['profile_image_url']
+      @profile_image_url = data['user']['profile_image_url']
+      @profile_image = nil
     end
   end
 end

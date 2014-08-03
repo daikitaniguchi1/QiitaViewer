@@ -30,6 +30,7 @@ module Qiita
                 p "index: #{i}"
                 p "title: #{data['title']}"
                 p "stock: #{data['stock_count']}"
+                p "url: #{data['url']}"
                 p "========================"
               Qiita::Item.new(data)
             }.compact!

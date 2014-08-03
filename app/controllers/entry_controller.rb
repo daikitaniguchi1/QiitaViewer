@@ -3,20 +3,14 @@ class EntryController < UIViewController
 
   def viewDidLoad
     super
-    
-    # webview = UIWebView.new
-    # webview.frame = view.frame # webviewの表示サイズを調整
-    # view.addSubview(webview)
-    # webview.loadHTMLString(@entry.body, baseURL: nil)
 
-    webview = UIWebView.new.tap do |v|
-      v.frame = self.view.bounds
-      v.scalesPageToFit = true
-      # v.loadRequest(NSURLRequest.requestWithURL(NSURL.URLWithString(self.item[:link])))
-      v.delegate = self
-      view.addSubview(v)
+    webview = UIWebView.new.tap do |wv|
+      wv.frame = view.frame  # webviewの表示サイズを調整
+      wv.scalesPageToFit = true  # ピンチイン・アウトを可能にする
+      view.addSubview(wv)
     end
-    webview.loadHTMLString(@entry.body, baseURL: nil)
-
+    url = NSURL.URLWithString(@entry.url)
+    request = NSURLRequest.requestWithURL(url)
+    webview.loadRequest request
   end
 end

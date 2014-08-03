@@ -20,30 +20,48 @@ class EntriesController < UITableViewController
     end
   end
 
-  # テーブルの行数を返却
+  # テーブルの行数（セル数）を決定
   def tableView(tableView, numberOfRowsInSection:section)
     @entries.count
   end
 
-  ENTRY_CELL_ID = 'Entry'
+  # 各セルの中身を決定
   def tableView(tableView, cellForRowAtIndexPath:indexPath)
-    cell = tableView.dequeueReusableCellWithIdentifier(ENTRY_CELL_ID, forIndexPath:indexPath)
-
-    entry = @entries[indexPath.row]
-    cell.entry = entry
-    cell.setNeedsDisplay # 再描画させる
-
-    cell
+    post = @entries[indexPath.row]  # 今何行目？
+    EntryCell.cellForPost(post, inTableView:tableView)
   end
 
+  # ENTRY_CELL_ID = 'Entry'
+  # def tableView(tableView, cellForRowAtIndexPath:indexPath)
+  #   cell = tableView.dequeueReusableCellWithIdentifier(ENTRY_CELL_ID, forIndexPath:indexPath)
+  #
+  #   entry = @entries[indexPath.row]
+  #   cell.entry = entry
+  #   cell.setNeedsDisplay # 再描画させる
+  #
+  #   cell
+  # end
+
+  # 各セルをタップした時の挙動を決定
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)
     entry = @entries[indexPath.row]
 
     controller = EntryController.new
     controller.entry = entry
 
-    # 画面遷移
+    # webviewに画面遷移
     navigationController.pushViewController(controller, animated:true)
+  end
+
+  def tableView(tableView, heightForRowAtIndexPath:indexPath)
+    EntryCell.heightForPost(@entries[indexPath.row], tableView.frame.size.width)
+  end
+
+  def reloadRowForPost(post)
+    row = @entries.index(post)
+    if row
+      view.reloadRowsAtIndexPaths([NSIndexPath.indexPathForRow(row, inSection:0)], withRowAnimation:false)
+    end
   end
 
 end

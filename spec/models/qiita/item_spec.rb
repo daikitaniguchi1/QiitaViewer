@@ -5,7 +5,8 @@ module Qiita
           'title' => 'title',
           'user' => {'url_name' => 'name'},
           'updated_at_in_words' => '2 days ago',
-          'body' => '<p>body</p>'
+          'body' => '<p>body</p>',
+          'url' => 'url'
       }
       @item = Item.new(@data)
     end
@@ -15,6 +16,7 @@ module Qiita
       @item.username.should.equal @data['user']['url_name']
       @item.updated_at.should.equal @data['updated_at_in_words']
       @item.body.should.equal @data['body']
+      @item.url.should.equal @data['url']
     end
   end
 end

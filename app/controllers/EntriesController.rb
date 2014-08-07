@@ -13,6 +13,7 @@ class EntriesController < UITableViewController
     Qiita::Client.fetch_tagged_items do |items, error_message|
       if error_message.nil?
         @entries = items
+        @entries.flatten!
         self.tableView.reloadData
       else
         p error_message

@@ -10,47 +10,47 @@ module Qiita
   #  }
   class Client
     BASE_URL = 'https://qiita.com/api/v1'
+    PAGE_COUNT = 5
     PER_PAGE = 100
-    PAGE = 1
     THRESHOLD = 10
 
     def self.fetch_tagged_items(&block)
-      url = BASE_URL + "/items.json?page=#{PAGE}&per_page=#{PER_PAGE}"
-      # url = BASE_URL + "/tags/#{tag_name}/items"
-      p "in!"
-      BW::HTTP.get(url) do |response|
-        items = []
-        message = nil
-        begin
-          if response.ok?
-            items = get_items(response)
-          else
-            message = get_error_message(response)
+      url = BASE_URL + "/items.json?per_page=#{PER_PAGE}&page="
+      items = []
+      message = nil
+      PAGE_COUNT.times do |i|
+        page = (i+1).to_s
+        BW::HTTP.get(url+page) do |response|
+          begin
+            if response.ok?
+              items << get_items(response)
+            else
+              message = get_error_message(response)
+            end
+          rescue => e
+            p e
+            items = []
+            message = 'Error'
           end
-        rescue => e
-          p e
-          items = []
-          message = 'Error'
+          block.call(items, message)
         end
-        block.call(items, message)
       end
     end
 
     private
 
     def self.get_items(response)
-      p "responsed!"
       json = BW::JSON.parse(response.body.to_s)
       # 1件ずつQiita::Itemクラスのインスタンスにして格納
-      # per_page=100の場合は、だいたい直近20時間の間に何ストックされたか。
+      # per_page=100につき、だいたい直近20時間の間に何ストックされたか。
       items = json.map.with_index(1) {|data, i|
         next if data['stock_count'].to_i < THRESHOLD
-        p "========================"
-        p "index: #{i}"
-        p "title: #{data['title']}"
-        p "stock: #{data['stock_count']}"
-        p "url: #{data['url']}"
-        p "========================"
+        # p "========================"
+        # p "index: #{i}"
+        # p "title: #{data['title']}"
+        # p "stock: #{data['stock_count']}"
+        # p "url: #{data['url']}"
+        # p "========================"
         Qiita::Item.new(data)
       }.compact!
     end

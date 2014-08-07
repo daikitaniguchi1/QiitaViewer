@@ -8,3 +8,5 @@ gem 'bubble-wrap'
 gem 'motion-live'
 
 gem 'webstub'
+
+gem 'motion-cocoapods'

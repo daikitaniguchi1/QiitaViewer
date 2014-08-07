@@ -10,15 +10,26 @@ class EntriesController < UITableViewController
     #  EnryというreuseIdentifierに相当するクラスはEntryCellであることを宣言
     self.tableView.registerClass(EntryCell, forCellReuseIdentifier:'Entry')
 
+    @ptrview = SSPullToRefreshView.alloc.initWithScrollView(tableView, delegate:self)
+
+    set_item_data
+  end
+
+  def set_item_data
     Qiita::Client.fetch_tagged_items do |items, error_message|
       if error_message.nil?
-        @entries = items
-        @entries.flatten!
+        @entries = items.flatten!
         self.tableView.reloadData
       else
         p error_message
       end
     end
+  end
+
+  def pullToRefreshViewDidStartLoading(ptrview)
+    @ptrview.startLoading
+    set_item_data
+    @ptrview.finishLoading
   end
 
   # テーブルの行数（セル数）を決定

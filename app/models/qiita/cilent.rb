@@ -10,9 +10,9 @@ module Qiita
   #  }
   class Client
     BASE_URL = 'https://qiita.com/api/v1'
-    PAGE_COUNT = 5
-    PER_PAGE = 100
-    THRESHOLD = 10
+    PAGE_COUNT = 3
+    PER_PAGE = 50
+    THRESHOLD = 15
 
     def self.fetch_tagged_items(&block)
       url = BASE_URL + "/items.json?per_page=#{PER_PAGE}&page="

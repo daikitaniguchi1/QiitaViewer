@@ -4,7 +4,7 @@ class EntriesController < UITableViewController
   def viewDidLoad
     super
 
-    self.title = 'Hot Entries'  # ナビゲーションバーのタイトルを変更
+    self.title = 'Qiita Hot Entries'  # ナビゲーションバーのタイトル
     @entries = []  # 取得したエントリを格納
 
     #  EnryというreuseIdentifierに相当するクラスはEntryCellであることを宣言

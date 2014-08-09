@@ -10,15 +10,15 @@ module Qiita
   #  }
   class Client
     BASE_URL = 'https://qiita.com/api/v1'
-    PAGE_COUNT = 3
-    PER_PAGE = 50
-    THRESHOLD = 15
+    PAGE_NUM = 1
+    PER_PAGE = 30
+    THRESHOLD = 1
 
     def self.fetch_tagged_items(&block)
       url = BASE_URL + "/items.json?per_page=#{PER_PAGE}&page="
       items = []
       message = nil
-      PAGE_COUNT.times do |i|
+      PAGE_NUM.times do |i|
         page = (i+1).to_s
         BW::HTTP.get(url+page) do |response|
           begin

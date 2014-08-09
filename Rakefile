@@ -14,4 +14,6 @@ Motion::Project::App.setup do |app|
   app.provisioning_profile = 'iOS_Team_Provisioning_Profile.mobileprovision'
   app.codesign_certificate = 'iPhone Developer: Daiki Taniguchi'
   app.deployment_target = "7.0"
+
+  app.info_plist['UIViewControllerBasedStatusBarAppearance'] = false
 end

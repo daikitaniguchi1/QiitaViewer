@@ -4,18 +4,18 @@ class EntriesController < UITableViewController
   def viewDidLoad
     super
 
-    self.title = 'Qiita Hot Entries'  # ナビゲーションバーのタイトル
+    self.title = 'Qiita ホットエントリー'  # ナビゲーションバーのタイトル
     @entries = []  # 取得したエントリを格納
 
     #  EnryというreuseIdentifierに相当するクラスはEntryCellであることを宣言
     self.tableView.registerClass(EntryCell, forCellReuseIdentifier:'Entry')
 
-    @ptrview = SSPullToRefreshView.alloc.initWithScrollView(tableView, delegate:self)
+    @refreshControl = UIRefreshControl.alloc.init
+    @refreshControl.addTarget(self,
+                              action:"onRefresh",
+                              forControlEvents:UIControlEventValueChanged)
+    self.refreshControl = @refreshControl
 
-    set_item_data
-  end
-
-  def set_item_data
     Qiita::Client.fetch_tagged_items do |items, error_message|
       if error_message.nil?
         @entries = items.flatten!
@@ -26,10 +26,17 @@ class EntriesController < UITableViewController
     end
   end
 
-  def pullToRefreshViewDidStartLoading(ptrview)
-    @ptrview.startLoading
-    set_item_data
-    @ptrview.finishLoading
+  def onRefresh
+    self.refreshControl.beginRefreshing
+    Qiita::Client.fetch_tagged_items do |items, error_message|
+      if error_message.nil?
+        @entries = items.flatten!
+        self.refreshControl.endRefreshing
+        self.tableView.reloadData
+      else
+        p error_message
+      end
+    end
   end
 
   # テーブルの行数（セル数）を決定
@@ -42,17 +49,6 @@ class EntriesController < UITableViewController
     post = @entries[indexPath.row]  # 今何行目？
     EntryCell.cellForPost(post, inTableView:tableView)
   end
-
-  # ENTRY_CELL_ID = 'Entry'
-  # def tableView(tableView, cellForRowAtIndexPath:indexPath)
-  #   cell = tableView.dequeueReusableCellWithIdentifier(ENTRY_CELL_ID, forIndexPath:indexPath)
-  #
-  #   entry = @entries[indexPath.row]
-  #   cell.entry = entry
-  #   cell.setNeedsDisplay # 再描画させる
-  #
-  #   cell
-  # end
 
   # 各セルをタップした時の挙動を決定
   def tableView(tableView, didSelectRowAtIndexPath:indexPath)

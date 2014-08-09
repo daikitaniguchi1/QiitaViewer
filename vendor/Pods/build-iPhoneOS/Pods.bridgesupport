@@ -1,0 +1,188 @@
+<?xml version='1.0'?>
+<signatures version='1.0'>
+<enum name='SSPullToRefreshViewStateClosing' value='3'/>
+<enum name='SSPullToRefreshViewStateLoading' value='2'/>
+<enum name='SSPullToRefreshViewStateNormal' value='0'/>
+<enum name='SSPullToRefreshViewStateReady' value='1'/>
+<class name='NSObject'>
+<method selector='pullToRefreshView:didTransitionToState:fromState:animated:'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<arg declared_type='SSPullToRefreshViewState' index='1' name='toState' type='i'/>
+<arg declared_type='SSPullToRefreshViewState' index='2' name='fromState' type='i'/>
+<arg declared_type='BOOL' index='3' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='pullToRefreshView:didUpdateContentInset:'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<arg declared_type='UIEdgeInsets' index='1' name='contentInset' type='{UIEdgeInsets=ffff}' type64='{UIEdgeInsets=dddd}'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='pullToRefreshView:willTransitionToState:fromState:animated:'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<arg declared_type='SSPullToRefreshViewState' index='1' name='toState' type='i'/>
+<arg declared_type='SSPullToRefreshViewState' index='2' name='fromState' type='i'/>
+<arg declared_type='BOOL' index='3' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='pullToRefreshViewDidFinishLoading:'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='pullToRefreshViewDidStartLoading:'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='pullToRefreshViewLastUpdatedAt:'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<retval declared_type='NSDate*' type='@'/>
+</method>
+<method selector='pullToRefreshViewShouldStartLoading:'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='setLastUpdatedAt:withPullToRefreshView:'>
+<arg declared_type='NSDate*' index='0' name='date' type='@'/>
+<arg declared_type='SSPullToRefreshView*' index='1' name='view' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setPullProgress:'>
+<arg declared_type='CGFloat' index='0' name='pullProgress' type='f' type64='d'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setState:withPullToRefreshView:'>
+<arg declared_type='SSPullToRefreshViewState' index='0' name='state' type='i'/>
+<arg declared_type='SSPullToRefreshView*' index='1' name='view' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+</class>
+<class name='SSPullToRefreshDefaultContentView'>
+<method selector='activityIndicatorView'>
+<retval declared_type='UIActivityIndicatorView*' type='@'/>
+</method>
+<method selector='lastUpdatedAtLabel'>
+<retval declared_type='UILabel*' type='@'/>
+</method>
+<method selector='statusLabel'>
+<retval declared_type='UILabel*' type='@'/>
+</method>
+</class>
+<class name='SSPullToRefreshSimpleContentView'>
+<method selector='activityIndicatorView'>
+<retval declared_type='UIActivityIndicatorView*' type='@'/>
+</method>
+<method selector='statusLabel'>
+<retval declared_type='UILabel*' type='@'/>
+</method>
+</class>
+<class name='SSPullToRefreshView'>
+<method selector='contentView'>
+<retval declared_type='UIView*' type='@'/>
+</method>
+<method selector='defaultContentInset'>
+<retval declared_type='UIEdgeInsets' type='{UIEdgeInsets=ffff}' type64='{UIEdgeInsets=dddd}'/>
+</method>
+<method selector='delegate'>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='expandedHeight'>
+<retval declared_type='CGFloat' type='f' type64='d'/>
+</method>
+<method selector='finishLoading'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='initWithScrollView:delegate:'>
+<arg declared_type='UIScrollView*' index='0' name='scrollView' type='@'/>
+<arg declared_type='id' index='1' name='delegate' type='@'/>
+<retval declared_type='id' type='@'/>
+</method>
+<method selector='isExpanded'>
+<retval declared_type='BOOL' type='B'/>
+</method>
+<method selector='refreshLastUpdatedAt'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='scrollView'>
+<retval declared_type='UIScrollView*' type='@'/>
+</method>
+<method selector='setContentView:'>
+<arg declared_type='UIView*' index='0' name='contentView' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setDefaultContentInset:'>
+<arg declared_type='UIEdgeInsets' index='0' name='defaultContentInset' type='{UIEdgeInsets=ffff}' type64='{UIEdgeInsets=dddd}'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setDelegate:'>
+<arg declared_type='id' index='0' name='delegate' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setExpandedHeight:'>
+<arg declared_type='CGFloat' index='0' name='expandedHeight' type='f' type64='d'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='startLoading'>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='startLoadingAndExpand:animated:'>
+<arg declared_type='BOOL' index='0' name='shouldExpand' type='B'/>
+<arg declared_type='BOOL' index='1' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='state'>
+<retval declared_type='SSPullToRefreshViewState' type='i'/>
+</method>
+</class>
+<informal_protocol name='SSPullToRefreshContentView'>
+<method selector='setLastUpdatedAt:withPullToRefreshView:' type='v16@0:4@8@12' type64='v32@0:8@16@24'>
+<arg declared_type='NSDate*' index='0' name='date' type='@'/>
+<arg declared_type='SSPullToRefreshView*' index='1' name='view' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setPullProgress:' type='v12@0:4f8' type64='v24@0:8d16'>
+<arg declared_type='CGFloat' index='0' name='pullProgress' type='f' type64='d'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='setState:withPullToRefreshView:' type='v16@0:4i8@12' type64='v28@0:8i16@20'>
+<arg declared_type='SSPullToRefreshViewState' index='0' name='state' type='i'/>
+<arg declared_type='SSPullToRefreshView*' index='1' name='view' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+</informal_protocol>
+<informal_protocol name='SSPullToRefreshViewDelegate'>
+<method selector='pullToRefreshView:didTransitionToState:fromState:animated:' type='v24@0:4@8i12i16B20' type64='v36@0:8@16i24i28B32'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<arg declared_type='SSPullToRefreshViewState' index='1' name='toState' type='i'/>
+<arg declared_type='SSPullToRefreshViewState' index='2' name='fromState' type='i'/>
+<arg declared_type='BOOL' index='3' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='pullToRefreshView:didUpdateContentInset:' type='v28@0:4@8{UIEdgeInsets=ffff}12' type64='v56@0:8@16{UIEdgeInsets=dddd}24'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<arg declared_type='UIEdgeInsets' index='1' name='contentInset' type='{UIEdgeInsets=ffff}' type64='{UIEdgeInsets=dddd}'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='pullToRefreshView:willTransitionToState:fromState:animated:' type='v24@0:4@8i12i16B20' type64='v36@0:8@16i24i28B32'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<arg declared_type='SSPullToRefreshViewState' index='1' name='toState' type='i'/>
+<arg declared_type='SSPullToRefreshViewState' index='2' name='fromState' type='i'/>
+<arg declared_type='BOOL' index='3' name='animated' type='B'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='pullToRefreshViewDidFinishLoading:' type='v12@0:4@8' type64='v24@0:8@16'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='pullToRefreshViewDidStartLoading:' type='v12@0:4@8' type64='v24@0:8@16'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<retval declared_type='void' type='v'/>
+</method>
+<method selector='pullToRefreshViewLastUpdatedAt:' type='@12@0:4@8' type64='@24@0:8@16'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<retval declared_type='NSDate*' type='@'/>
+</method>
+<method selector='pullToRefreshViewShouldStartLoading:' type='B12@0:4@8' type64='B24@0:8@16'>
+<arg declared_type='SSPullToRefreshView*' index='0' name='view' type='@'/>
+<retval declared_type='BOOL' type='B'/>
+</method>
+</informal_protocol>
+</signatures>
